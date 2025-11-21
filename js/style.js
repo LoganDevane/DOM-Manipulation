@@ -1,59 +1,125 @@
 
-const hiddenMsg = document.getElementById("secretText991");
+
+const secretText = document.getElementById("secretText991");
 
 
-hiddenMsg.style.visibility = "visible";
-
-hiddenMsg.textContent = "You found me using the DOM!";
-
-
+secretText.style.visibility = "visible";
+secretText.style.transition = "0.6s ease";
+secretText.textContent = "You found me using the DOM!";
 
 
 
-const weirdBtn = document.getElementById("weirdButtonX");
-const colorPatch = document.querySelector(".colorPatch-z9");
 
-let clickCount = 0;
+const weirdButton = document.getElementById("weirdButtonX");
+const patchZ9 = document.querySelector(".colorPatch-z9");
+let timesClicked = 0;
 
+weirdButton.addEventListener("click", () => {
+    timesClicked++;
 
-weirdBtn.addEventListener("click", () => {
-    clickCount++;
+    
+    let hue = Math.floor(Math.random() * 360);
+    let color = `hsl(${hue}, 85%, 60%)`;
 
-   
+    patchZ9.style.backgroundColor = color;
+    patchZ9.style.boxShadow = `0 0 20px ${color}`;
+    patchZ9.style.transition = "0.3s";
 
-    const funColor = `hsl(${Math.floor(Math.random() * 360)}, 90%, 60%)`;
-    colorPatch.style.backgroundColor = funColor;
-    colorPatch.style.boxShadow = `0 0 20px ${funColor}`;
-
-   
-    weirdBtn.textContent = clickCount;
+    
+    
+    weirdButton.textContent = timesClicked;
 });
 
 
 
-const shiftBox = document.getElementById("box7");
 
-let large = false; 
+const box7 = document.getElementById("box7");
+let isBig = false;
+
+box7.style.transition = "0.25s ease";
 
 
-shiftBox.addEventListener("mouseenter", () => {
-    shiftBox.style.borderRadius = "50%";
+
+box7.addEventListener("mouseenter", () => {
+    box7.style.borderRadius = "50%";
 });
 
-shiftBox.addEventListener("mouseleave", () => {
-    shiftBox.style.borderRadius = "0%";
+
+
+box7.addEventListener("mouseleave", () => {
+    box7.style.borderRadius = "0%";
 });
 
 
-shiftBox.addEventListener("dblclick", () => {
-    if (large) {
-        shiftBox.style.width = "100px";
-        shiftBox.style.height = "100px";
-        shiftBox.style.transition = "0.25s";
+
+box7.addEventListener("dblclick", () => {
+    if (isBig) {
+        box7.style.width = "100px";
+        box7.style.height = "100px";
     } else {
-        shiftBox.style.width = "200px";
-        shiftBox.style.height = "200px";
-        shiftBox.style.transition = "0.25s";
+        box7.style.width = "200px";
+        box7.style.height = "200px";
     }
-    large = !large;
+    isBig = !isBig;
 });
+
+
+
+
+const decoder = document.getElementById("decoderInput");
+const decodedText = document.getElementById("decodedOutput");
+
+decoder.addEventListener("input", () => {
+    let value = decoder.value;
+
+    if (value.toLowerCase().includes("x")) {
+        decodedText.textContent = "Forbidden letter detected.";
+        decodedText.style.color = "#ff4444";
+    } else {
+        decodedText.textContent = value;
+        decodedText.style.color = "#00b7ff";
+    }
+});
+
+
+
+
+const mysteryList = document.getElementById("mysteryList");
+const liItems = mysteryList.querySelectorAll("li");
+
+liItems.forEach((item) => {
+    item.addEventListener("click", () => {
+
+   
+        
+        item.className = "highlight1";
+
+     
+        
+        let index = 0;
+        liItems.forEach((other) => {
+            if (other !== item) {
+                if (index % 2 === 0) {
+                    other.className = "highlight-l";
+                    
+                } else {
+                    other.className = "highlightI"; 
+                    
+                }
+                index++;
+            }
+        });
+    });
+});
+
+
+
+
+const header = document.getElementById("glitchTitle");
+
+setTimeout(() => {
+    header.textContent = "DOM Restored!";
+    header.style.color = "#34e1ff";
+    header.style.fontSize = "40px";
+    header.style.transition = "0.6s ease";
+}, 3000);
